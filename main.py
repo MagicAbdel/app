@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_restful import Api, Resource, reqparse
+from flask_restful import Api, Resource, reqparse, abort
 
 app = Flask(__name__)
 api = Api(app)
@@ -23,16 +23,34 @@ user_put_args.add_argument("state", type=str, help="State")
 user_put_args.add_argument("parent1_id", type=int, help="Id of the first parent")
 user_put_args.add_argument("parent2_id", type=int, help="Id of the second parent")
 
+def check_exist(user_id, boolean):
+    if boolean == False:
+        if user_id not in userList:
+            abort(404, message="User id is not valid")
+    else:
+        if user_id in userList:
+            abort(409, message="User id already exists")
+
 class Users(Resource):
     def get(self, user_id):
+        check_exist(user_id, False)
         return userList[user_id]
     
     def put(self, user_id):
+        check_exist(user_id, True)
         args = user_put_args.parse_args()
         if (args["street"] == None or args["city"] == None or args["zip"] == None or args["state"] == None) and args["parent1_id"] == None and args["parent2_id"] == None:
-            return {"message" : "provide an address or a parent id"}
+            abort(400, message="Please provide an address or a parent id")
+        
         userList[user_id] = args
         return userList[user_id], 201
+    
+    def delete(self, user_id):
+        check_exist(user_id, False)
+        del userList[user_id]
+        return '', 204
+        
+
     
     
 api.add_resource(Users, "/user/<string:user_id>")
