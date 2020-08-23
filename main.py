@@ -1,8 +1,26 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 api = Api(app)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+
+db = SQLAlchemy(app)
+
+class UserModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    lastname = db.Column(db.String(100), nullable=False)
+    street = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    zipcode = db.Column(db.Integer, nullable=False)
+    state = db.Column(db.String(100), nullable=False)
+    parent1_id = db.Column(db.Integer)
+    parent2_id = db.Column(db.Integer)
+    
+db.create_all()
 
 userList= {"0": {"name" : "Abdessalam",
                 "lastname" : "Zaimi",
@@ -50,8 +68,6 @@ class Users(Resource):
         del userList[user_id]
         return '', 204
         
-
-    
     
 api.add_resource(Users, "/user/<string:user_id>")
 
