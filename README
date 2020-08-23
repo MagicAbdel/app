@@ -1,0 +1,29 @@
+This is an APP that stores user data
+
+Data is composed of
+- first name
+- last name
+- address (street, city, state, zip)
+
+The are two users types:
+- Parent
+- Child
+
+The child type cannot have an address
+and must belong to at least one parent
+
+This app provides API to:
+	1 - Create user data
+	2 - Delete user data
+	3 - Update user data
+	
+Data is saved in a database (database.db)
+
+
+#####
+
+Installing dependencies
+
+#####
+
+pip install -r requirements.txt
