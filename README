@@ -22,17 +22,38 @@ Data is saved in a database (database.db)
 
 #####
 
-Install dependencies
+requires python version 3.8
+requires pipenv, run the following command:
+$ pip install pipenv
 
+run the following command to install dependencies:
+$ pipenv install
+
+run this one to enter the environment:
+$ pipenv shell
+
+How to run the server:
+
+change directory to app with this command:
+(env)$ cd app
+
+make the migrations using the following commands:
+(env)$ python manage.py makemigrations
+(env)$ python manage.py migrate
+
+create a superuser account with this command:
+(env)$ python manage.py createsuperuser
+
+run the server:
+(env)$ python manage.py runserver
 
 #####
 
-User Registration - registration/
-User Login - login/
-User Logout - logout/
-User Details - user/
-Change Password - password/change/
-Password Reset - password/reset/
-Confirm Password Reset - password/reset/confirm/
+when the server runs go to  the url of the server /admin
+(by default it's  http://127.0.0.1:8000/admin)
+
+then login with the superuser account created before and go to api
+there you can create, read, update, delete new users (childs and parents)
+data is stored in a database (db.sqlite3 in /app folder)
 
 #####
