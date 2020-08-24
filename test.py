@@ -2,40 +2,24 @@
 import requests
 
 URL = "http://127.0.0.1:5000/"
+data = [{
+    "name": "Abdessalam",
+    "lastname": "Zaimi",
+    "street": "4 rue Pasteur",
+    "city": "Paris",
+    "zipcode": 94270,
+    "state": "France",
+    "parent1_id": 0,
+    "parent2_id": 0
+}]
+
+print("test : add complete user data")
+response = requests.put(URL + "user/", data[0])
+print(response)
 
 print("----------")
 print("test : get existing user data")
-response = requests.get(URL + "user/0")
-print(response.json())
-print("----------")
-
-print("test : get non existing user data")
-response = requests.get(URL + "user/999")
-print(response.json())
-print("----------")
-
-print("test : add existing user data")
-response = requests.put(URL + "user/0", {"name" : "super", "lastname": "man", "parent1_id" : "0"})
-print(response.json())
-print("----------")
-
-print("test : add user data with missing information")
-response = requests.put(URL + "user/1", {"name" : "super", "lastname": "man"})
-print(response.json())
-print("----------")
-
-print("test : add complete user data")
-response = requests.put(URL + "user/1", {"name" : "super", "lastname": "man", "parent1_id" : "0"})
-print(response.json())
-print("----------")
-
-print("test : delete existing user data")
-response = requests.delete(URL + "user/1")
+response = requests.get(URL + "user/")
 print(response)
-print("----------")
 
-print("test : delete non existing user data")
-response = requests.delete(URL + "user/999")
-print(response.json())
-print("----------")
 

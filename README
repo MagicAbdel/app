@@ -22,8 +22,17 @@ Data is saved in a database (database.db)
 
 #####
 
-Installing dependencies
+Install dependencies
+
+pip install -r requirements.txt
 
 #####
 
-pip install -r requirements.txt
+Create DB
+
+$ python
+>> from main import db
+>> db.create_all()
+>> exit()
+
+#####
