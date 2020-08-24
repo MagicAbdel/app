@@ -24,15 +24,15 @@ Data is saved in a database (database.db)
 
 Install dependencies
 
-pip install -r requirements.txt
 
 #####
 
-Create DB
-
-$ python
->> from main import db
->> db.create_all()
->> exit()
+User Registration - registration/
+User Login - login/
+User Logout - logout/
+User Details - user/
+Change Password - password/change/
+Password Reset - password/reset/
+Confirm Password Reset - password/reset/confirm/
 
 #####
